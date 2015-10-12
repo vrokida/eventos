@@ -8,7 +8,7 @@ import EventAvatar from './EventoAvatar';
 
 export default class EventRow extends React.Component{
 		onClick(ev){
-			this.props.see.call(null, this.props.name)
+			this.props.see.call(null, this.props.name,this.props.date,this.props.page,this.props.description)
 		}
 
 		render (){

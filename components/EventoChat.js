@@ -11,7 +11,7 @@ export default	class EventChat extends React.Component{
 	
 
 	render(){
-		return <ul className="eventchat">
+		return <div className="eventchat">
 		<CSSTransitionGroup transitionName="message-animation">
 			{
 				this.props.messages.map((message)=>{
@@ -19,7 +19,7 @@ export default	class EventChat extends React.Component{
 				})
 			}
 		</CSSTransitionGroup>
-		</ul>
+		</div>
 	}
 }
 EventChat.defaultProps={messages:[]};

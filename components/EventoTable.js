@@ -15,6 +15,9 @@ export default	class EventTable extends React.Component{
 							key={event.number} 
 							name={event.name} 
 							image={event.image}
+							date={event.date}
+							page={event.page}
+							description={event.description}
 							see={this.props.onSee}/>
 						})
 					}

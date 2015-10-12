@@ -68,16 +68,20 @@ var EventApp = (function (_React$Component) {
 
 	_createClass(EventApp, [{
 		key: 'onSee',
-		value: function onSee(name) {
-			var message = { id: (0, _uid2['default'])(), text: name };
-			this.state.messages.push(message);
+		value: function onSee(name, date, page, description) {
+
+			var message = { id: (0, _uid2['default'])(), text: name, date: date, page: page, description: description };
+			//	this.state.messages=[];
+			this.state.messages.unshift(message);
 			var messages = this.state.messages;
 			this.setState({ messages: messages });
 		}
 	}, {
 		key: 'render',
 		value: function render() {
-			var events = [{ number: 1, name: 'Agiles 2015', image: 'agiles2015.jpg' }, { number: 2, name: 'Ada Lovelace', image: "ada.jpg" }, { number: 3, name: 'DevAcademy.la', image: "devacademy.jpg" }, { number: 4, name: 'Buen trip', image: "buentrip.jpg" }, { number: 5, name: 'Grils in tech', image: "girlsintech.png" }];
+			var events = [{ number: 1, name: 'Agiles 2015', image: 'agiles2015.jpg', date: 'OCTUBRE 22-24 // MONTEVIDEO, URUGUAY', page: 'http://agiles2015.agiles.org/es/?lang=es',
+				description: 'EL EVENTO ANUAL DE LA COMUNIDAD AGIL PREPARA SU NUEVA EDICION AGILES 2015: VIII JORNADAS LATINOAMERICANAS DE METODOLOGÍAS AGILES.Montevideo sera la ciudad que reciba las Octavas Jornadas Latinoamericanas de Metodologias Ágiles y como en las 7 ediciones anteriores reunira a los mayores referentes de Latinoamerica sobre esta tematica, asi como reconocidos exponentes de otras regiones' }, { number: 2, name: 'Ada Lovelace', image: "ada.jpg", date: 'Martes 13 de Octubre / 18h30', page: 'http://info.thoughtworks.com/200_aniversario_Ada_lovelace_Quito.html',
+				description: 'El dia de Ada Lovelace es la celebracion de los logros de las mujeres en las ciencias, tecnologia, ingenieria y matematica. Ada Lovelace fue una matematica de quien se refieren como la primera persona programadora, ella apoyo en a dar forma a la tecnologia del siglo 19 y es reconocida como un icono en la historia de la computacion' }, { number: 3, name: 'DevAcademy.la', image: "devacademy.jpg", date: 'Todos los miercoles', page: 'https://devacademy.la/', description: 'Entrevistas con invitados internacionales Mas de 100 programas gratuitos, todos los miercoles en vivo por streaming' }, { number: 4, name: 'Buen trip', image: "buentrip.jpg", date: '4 de junio ', page: 'http://buentriphub.com/', description: ' Bootcamp Lean Startup :Prueba tus ideas y nuevos productos en un Bootcamp de emprendimiento de 1 dia donde no solo aprenderas a emprender con Lean Startup pero tambien a dar los primeros pasos para posicionar tu emprendimiento con Growth Hacking' }, { number: 5, name: 'Grils in tech', image: "girlsintech.png", date: '20/10/2015', page: 'http://www.girlsintech.org/' }];
 
 			return _react2['default'].createElement(
 				'div',
@@ -195,7 +199,7 @@ var EventChat = (function (_React$Component) {
 		key: 'render',
 		value: function render() {
 			return _reactAddons2['default'].createElement(
-				'ul',
+				'div',
 				{ className: 'eventchat' },
 				_reactAddons2['default'].createElement(
 					CSSTransitionGroup,
@@ -254,9 +258,60 @@ var EventInfo = (function (_React$Component) {
 		key: "render",
 		value: function render() {
 			return _react2["default"].createElement(
-				"li",
+				"div",
 				{ className: "eventInfo" },
-				this.props.message.text
+				_react2["default"].createElement(
+					"div",
+					null,
+					_react2["default"].createElement(
+						"p",
+						null,
+						" Nombre"
+					),
+					_react2["default"].createElement(
+						"p",
+						null,
+						" ",
+						this.props.message.text
+					),
+					_react2["default"].createElement("br", null),
+					_react2["default"].createElement(
+						"p",
+						null,
+						" Donde? Cuando?"
+					),
+					_react2["default"].createElement(
+						"p",
+						null,
+						" ",
+						this.props.message.date,
+						" "
+					),
+					_react2["default"].createElement("br", null),
+					_react2["default"].createElement(
+						"p",
+						null,
+						" Descripcion"
+					),
+					_react2["default"].createElement(
+						"p",
+						null,
+						" ",
+						this.props.message.description
+					),
+					_react2["default"].createElement("br", null),
+					_react2["default"].createElement(
+						"p",
+						null,
+						" ",
+						_react2["default"].createElement(
+							"a",
+							{ href: this.props.message.page },
+							this.props.message.text
+						)
+					),
+					_react2["default"].createElement("br", null)
+				)
 			);
 		}
 	}]);
@@ -309,7 +364,7 @@ var EventRow = (function (_React$Component) {
 		_createClass(EventRow, [{
 				key: 'onClick',
 				value: function onClick(ev) {
-						this.props.see.call(null, this.props.name);
+						this.props.see.call(null, this.props.name, this.props.date, this.props.page, this.props.description);
 				}
 		}, {
 				key: 'render',
@@ -380,6 +435,9 @@ var EventTable = (function (_React$Component) {
 						key: event.number,
 						name: event.name,
 						image: event.image,
+						date: event.date,
+						page: event.page,
+						description: event.description,
 						see: _this.props.onSee });
 				})
 			);
